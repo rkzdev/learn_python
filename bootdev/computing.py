@@ -97,7 +97,7 @@ def bitwise_end_operator():
     print(val3)
 
 
-def permission_using_binary():
+def permission_using_bitwise_and():
     can_create_guild = 0b1000
     can_review_guild = 0b0100
     can_delete_guild = 0b0010
@@ -127,6 +127,77 @@ def permission_using_binary():
     print(user_can_edit_guild)
 
 
+def bitwise_or_operator():
+    val1 = 5
+    val2 = 7
+
+    # 0101
+    # |
+    # 0111
+    # -----
+    # 0111
+    print(val1 | val2)
+
+
+def calculate_party_permission(glorfindel, gladriel, elendil, elrond):
+    # glorfindel = 0b0001
+    # galadriel = 0b0010
+    # elendil = 0b0001
+    # elrond = 0b1011
+
+    return glorfindel | gladriel | elendil | elrond
+
+
+def test_calculate_party_permission():
+    glorfindel = 0b0001
+    galadriel = 0b0010
+    elendil = 0b0001
+    elrond = 0b1011
+
+    can_create_guild = 0b1000
+    can_review_guild = 0b0100
+    can_delete_guild = 0b0010
+    can_edit_guild = 0b0001
+
+    party_pem = calculate_party_permission(glorfindel, galadriel, elendil, elrond)
+
+    print("-" * 80)
+    print(f"glorifindel: 0b{glorfindel:04b}")
+    print(f"aladriel: 0b{galadriel:04b}")
+    print(f"elendil: 0b{elendil:04b}")
+    print(f"elrond: 0b{elrond:04b}")
+
+    party_can_create_guild = party_pem & can_create_guild == can_create_guild
+    party_can_review_guild = party_pem & can_review_guild == can_review_guild
+    party_can_delete_guild = party_pem & can_delete_guild == can_delete_guild
+    party_can_edit_guild = party_pem & can_edit_guild == can_edit_guild
+
+    print(f"party perm: 0b{party_pem:04b}")
+    print(f"part can create guild: {party_can_create_guild}")
+    print(f"part can review guild: {party_can_review_guild}")
+    print(f"part can delete guild: {party_can_delete_guild}")
+    print(f"part can edit guild: {party_can_edit_guild}")
+
+
+# NOT
+# The not operator reverses the result. It returns False if the input was True
+# and vice-versa.
+
+
+def not_operator():
+    print(not True)
+    # Print: False
+    print(not False)
+    # Print: True
+
+
+# Converting Binary
+# Python has built-in functionality to parse strings of 1's and 0's as binary numbers.
+def convert_string_of_ones_and_zeroes():
+    heads = "100"
+    print(int(heads, 2))
+
+
 def main():
     test(3, 5, 2, 1, 4)
     test(5, 5, 5, 5, 5)
@@ -141,7 +212,15 @@ def main():
 
     bitwise_end_operator()
 
-    permission_using_binary()
+    permission_using_bitwise_and()
+
+    bitwise_or_operator()
+
+    test_calculate_party_permission()
+
+    not_operator()
+
+    convert_string_of_ones_and_zeroes()
 
 
 if __name__ == "__main__":
